@@ -3,9 +3,8 @@
 
 <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Card title</h4>
+      <h4 class="card-title">Category menu</h4>
       <a class="btn btn-primary" href="{{ route('categories.create') }}">Create a category</a>
-      <p class="card-text">Some example text. Some example text.</p>
       <table class="table">
         <thead>
           <tr>

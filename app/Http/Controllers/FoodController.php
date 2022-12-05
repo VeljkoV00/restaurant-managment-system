@@ -17,7 +17,8 @@ class FoodController extends Controller
     public function index()
     {
         $foods = Food::all();
-        return view('food.index', compact('foods'));
+        $categories = Category::all();
+        return view('food.index', compact('foods', 'categories'));
     }
 
     /**
@@ -52,7 +53,7 @@ class FoodController extends Controller
         $food->image = $imagePath;
         $food->save();
 
-        return redirect()->route('foods.index');
+        return redirect()->route('foods.index')->with('success', 'Food created');
         
  
  
@@ -76,9 +77,10 @@ class FoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Food $food)
     {
-        return view('food.edit');
+        $categories = Category::all();
+        return view('food.edit', compact('food', 'categories'));
     }
 
     /**
@@ -88,9 +90,22 @@ class FoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FoodStoreRequest $request, Food $food)
     {
-        //
+        $imagePath = 'storage/' .  $request->file('image')->store('postImages' ,'public');
+        $name = $request->input('name');
+        $price = $request->input('price');
+        $category_id = $request->input('category_id');
+        $description = $request->input('description');
+        
+        $food->name = $name;
+        $food->price = $price;
+        $food->category_id = $category_id;
+        $food->description = $description;
+        $food->image = $imagePath;
+        $food->save();
+
+        return redirect()->route('foods.index')->with('success', 'Food updated');
     }
 
     /**
@@ -99,8 +114,11 @@ class FoodController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Food $food)
     {
-        //
+        $food->delete();
+
+        return redirect()->route('foods.index')->with('success', 'Food deleted');
+
     }
 }

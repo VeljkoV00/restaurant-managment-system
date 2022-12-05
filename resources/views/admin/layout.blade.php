@@ -17,7 +17,7 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Chefs</a>
+                <a class="nav-link active" aria-current="page" href="{{ route('chefs.index') }}">Chefs</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ route('foods.index') }}">Food</a>
@@ -33,7 +33,12 @@
         </div>
       </nav>
 
-
+      @if ($message = Session::get('success'))
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{ $message }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      @endif 
       @yield('content')
       
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

@@ -2,8 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">Some example text. Some example text.</p>
+      <h4 class="card-title">Admin dashboard</h4>
       <table class="table">
         <thead>
           <tr>

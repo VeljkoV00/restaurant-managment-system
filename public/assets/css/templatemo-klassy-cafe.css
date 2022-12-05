@@ -923,7 +923,8 @@ menu
 }
 
 .card1 {
-  background-image: url(../images/menu-item-01.jpg);
+  height:100px'
+  width:150px
 }
 .card2 {
   background-image: url(../images/menu-item-02.jpg);

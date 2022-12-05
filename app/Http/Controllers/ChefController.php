@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChefStoreRequest;
+use App\Models\Chef;
 use Illuminate\Http\Request;
 
 class ChefController extends Controller
@@ -13,7 +15,8 @@ class ChefController extends Controller
      */
     public function index()
     {
-        //
+        $chefs = Chef::all();
+        return view('chef.index', compact('chefs'));
     }
 
     /**
@@ -23,7 +26,7 @@ class ChefController extends Controller
      */
     public function create()
     {
-        //
+        return view('chef.create');
     }
 
     /**
@@ -32,9 +35,16 @@ class ChefController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ChefStoreRequest $request)
     {
-        //
+        $imagePath = 'storage/' .  $request->file('image')->store('postImage' ,'public');
+        $name = $request->input('name');
+        $chef = new Chef();
+        $chef->name = $name;
+        $chef->image = $imagePath;
+        $chef->save();
+
+        return redirect()->route('chefs.index')->with('success', 'Chef created');
     }
 
     /**
@@ -54,9 +64,9 @@ class ChefController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Chef $chef)
     {
-        //
+        return view('chef.edit', compact('chef'));
     }
 
     /**
@@ -66,9 +76,16 @@ class ChefController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ChefStoreRequest $request, Chef $chef)
     {
-        //
+        $name = $request->input('name');
+        $imagePath = 'storage/' .  $request->file('image')->store('postImages' ,'public');
+
+        $chef->name = $name;
+        $chef->image = $imagePath;
+        $chef->save();
+        return redirect()->route('chefs.index')->with('success', 'Chef updated');
+
     }
 
     /**
@@ -77,8 +94,9 @@ class ChefController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Chef $chef)
     {
-        //
+        $chef->delete();
+        return redirect()->route('chefs.index')->with('success', 'Chef deleted');
     }
 }
