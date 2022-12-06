@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('email')->unique();
             $table->string('number');
+            $table->string('status')->default('pending');
             $table->integer('num_guests');
             $table->date('time');
             $table->string('message');

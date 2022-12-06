@@ -17,7 +17,12 @@ class Reservation extends Model
         'number',
         'time',
         'num_guests',
-        'user_id'
+        'user_id',
+        'status'
+    ];
+
+    protected $hidden = [
+        'status'
     ];
 
     public function user(){

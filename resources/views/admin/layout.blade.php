@@ -26,7 +26,7 @@
                 <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
+                <a class="nav-link " href="{{ route('reservation.index') }}">Reservations</a>
               </li>
             </ul>
           </div>
@@ -36,7 +36,7 @@
       @if ($message = Session::get('success'))
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>{{ $message }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">Go back</button>
       </div>
       @endif 
       @yield('content')

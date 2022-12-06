@@ -14,6 +14,6 @@ class HomeController extends Controller
         $chefs = Chef::latest()->take(3)->get();
         $foods = Food::all();
         $categories = Category::all();
-        return view('home', compact('chefs', 'foods', 'categories'));
+        return view('home', compact('chefs', 'foods', 'categories',));
     }
 }

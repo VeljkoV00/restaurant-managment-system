@@ -10,23 +10,27 @@ use Illuminate\Support\Facades\Auth;
 class ReservationController extends Controller
 {
 
-    public function index(){
+    public function store(ReservationStoreRequest $request)
+    {
 
-        return view('reservation.index');
-    }
-    public function store(ReservationStoreRequest $request){
-
-         Reservation::create([
+        Reservation::create([
             'name' => $request->name,
             'user_id' => Auth::user()->id,
             'email' => $request->email,
             'message' => $request->message,
             'number' => $request->number,
-            'time' => date('Y-m-d H:i:s' , strtotime($request->time)),
+            'time' => date('Y-m-d H:i:s', strtotime($request->time)),
             'num_guests' => $request->num_guests
-            
+
         ]);
 
-      
+        return back()->with('success', 'Reservation has been recived');
+    }
+
+    public function index(){
+
+
+        $reservations = Reservation::where('user_id', Auth::user()->id)->get();
+        return view('reservation.usersreservation', compact('reservations'));
     }
 }

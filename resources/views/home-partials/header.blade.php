@@ -11,7 +11,8 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                        <li class="scroll-to-section"><a href="#about">About</a></li>
+                        <li class="scroll-to-section"></li>
+                       
                         @guest
                             
                   
@@ -45,9 +46,10 @@
                         @if (Auth()->user()->usertype == "1")
                         <li class="scroll-to-section"><a href="{{ route('admin.dash') }}">Dashboard</a></li> 
                         @else
-                        <li><a href="{{ route('reservation.index') }}">My reservations</a></li>
+                        <li><a href="{{ route('user.reservation.index') }}">My reservations</a></li>
                         @endif
                         @endauth
+                       
                        
                        
                         <li class="submenu">
