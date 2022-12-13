@@ -4,14 +4,24 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
+                    <a href="{{ route('home') }}" class="logo">
                         <img src="assets/images/klassy-logo.png" align="klassy cafe html template">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                        <li class="scroll-to-section"></li>
+                        <li class="scroll-to-section"><a href="{{ route('home') }}" class="active">Home</a></li>
+                        @auth
+                            
+                        <li class="scroll-to-section"> <form method="POST" action="{{ route('logout') }}" x-data>
+                            @csrf
+
+                            <x-jet-dropdown-link href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-jet-dropdown-link>
+                        </form></li>
+                        @endauth
                        
                         @guest
                             

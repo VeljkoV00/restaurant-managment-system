@@ -22,9 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 //Home route
 Route::get('/', [HomeController::class, 'index'])->name('home');
-//Reservation Route
+// User  Reservation Route
 Route::post('/reservations', [ReservationController::class, 'store'])->name('reservation.store');
 Route::get('/reservations', [ReservationController::class, 'index'])->name('user.reservation.index');
+Route::get('/reservations/{reservation}', [ReservationController::class, 'delete'])->name('reservation.delete');
 //Admin routes
 Route::prefix('admin')->middleware('admin', 'auth')->group(function () {
     Route::get('/',[AdminController::class, 'index'])->name('admin.dash');
@@ -35,7 +36,7 @@ Route::prefix('admin')->middleware('admin', 'auth')->group(function () {
     Route::put('/reservations/{reservation}', [AdminController::class, 'update'])->name('reservation.update');
 
 });
-
+/*
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -45,3 +46,4 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+*/

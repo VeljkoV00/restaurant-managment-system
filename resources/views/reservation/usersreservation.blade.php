@@ -26,14 +26,21 @@
                     <td>{{ $reservation->name }}</td>
                     <td>{{ $reservation->email }}</td>
                     <td>{{ $reservation->status }}</td>
-                    <td>Delete</td>
+                    <td>
+                      <form action="{{ route('reservation.delete', $reservation) }}" method="GET">
+                        @method('DELETE')
+                        @csrf
+                         <button type="submit" class="btn btn-danger">Delete</button>
+                       </form>
+                    </td>
+                  
+                   
                   </tr>
                   @endforeach
                
                 </tbody>
               </table>
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <h5 class="card-title">My Reservations</h5>
           <a href="{{ route('home') }}" class="btn btn-primary">Go back to the site</a>
         </div>
       </div>

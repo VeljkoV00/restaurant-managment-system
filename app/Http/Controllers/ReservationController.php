@@ -33,4 +33,11 @@ class ReservationController extends Controller
         $reservations = Reservation::where('user_id', Auth::user()->id)->get();
         return view('reservation.usersreservation', compact('reservations'));
     }
+
+    public function delete(Reservation $reservation){
+        
+        $reservation->delete();
+
+        return redirect()->back();
+    }
 }
